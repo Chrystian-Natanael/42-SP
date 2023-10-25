@@ -36,18 +36,33 @@ FILES = ft_isalpha\
 		ft_putendl_fd\
 		ft_putnbr_fd
 
-	
 OFILES = $(FILES:%=%.o)
 CFILES = $(FILES:%=%.c)
 NAME = libft.a
 
-.phony: all, clean, fclean, re
+BFILES = ft_lstnew.c\
+		 ft_lstadd_front.c\
+		 ft_lstsize.c\
+		 ft_lstlast.c\
+		 ft_lstadd_back.c\
+		 ft_lstdelone.c\
+		 ft_lstclear.c\
+		 ft_lstiter.c\
+		 ft_lstmap.c
+
+BOFILES = $(BFILES:%=%.o)
+
+.phony: all, clean, fclean, re, bonus
 
 $(NAME):
 	$(COMP) -Ilibft.h $(FLAGS) -c $(CFILES)
 	ar rvc $(NAME) $(OFILES) 
 
 all: $(NAME)
+
+bonus: $(BFILES)
+	$(COMP) -Ilibft.h $(FLAGS) -c $(BFILES)
+	ar rvc $(NAME) $(OFILES) 
 
 clean:
 	rm -f $(OFILES)
