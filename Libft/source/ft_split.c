@@ -6,7 +6,7 @@
 /*   By: cnatanae <cnatanae@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/17 09:17:44 by cnatanae          #+#    #+#             */
-/*   Updated: 2023/10/19 05:14:33 by cnatanae         ###   ########.fr       */
+/*   Updated: 2023/10/23 19:22:29 by cnatanae         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ static char	*ft_put_letter(char *s, char c)
 	char	*str;
 
 	i = 0;
-	str = (char *)malloc(sizeof(char) * ft_size(s, c) + 1);
+	str = (char *)ft_calloc(1, sizeof(char) * ft_size(s, c) + 1);
 	if (!str)
 		return (NULL);
 	while (s[i] != c)
@@ -55,7 +55,6 @@ static char	*ft_put_letter(char *s, char c)
 		str[i] = s[i];
 		i++;
 	}
-	str[i] = '\0';
 	return (str);
 }
 
@@ -65,7 +64,7 @@ char	**ft_split(char const *s, char c)
 	char	**split;
 
 	idx_b = 0;
-	split = (char **)malloc((ft_count_words(s, c) + 1) * sizeof(char *));
+	split = (char **)ft_calloc((ft_count_words(s, c) + 1), sizeof(char *));
 	if (!split || !s)
 		return (0);
 	while (*s)
@@ -84,6 +83,5 @@ char	**ft_split(char const *s, char c)
 		else
 			s++;
 	}
-	split[idx_b] = NULL;
 	return (split);
 }
