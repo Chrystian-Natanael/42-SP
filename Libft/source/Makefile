@@ -50,7 +50,7 @@ BFILES = ft_lstnew.c\
 		 ft_lstiter.c\
 		 ft_lstmap.c
 
-BOFILES = $(BFILES:%=%.o)
+BOFILES = $(BFILES:%.c=%.o)
 
 .phony: all, clean, fclean, re, bonus
 
@@ -61,13 +61,13 @@ $(NAME):
 all: $(NAME)
 
 bonus: $(BFILES)
-	$(COMP) -Ilibft.h $(FLAGS) -c $(BFILES)
-	ar rvc $(NAME) $(OFILES) 
+	$(COMP) -Ilibft.h $(FLAGS) -c $(BFILES) $(CFILES)
+	ar rvc $(NAME) $(BOFILES) $(OFILES)
 
 clean:
 	rm -f $(OFILES)
 
 fclean: clean
-	rm -f $(NAME)
+	rm -f $(NAME) $(BOFILES)
 
 re: fclean all
