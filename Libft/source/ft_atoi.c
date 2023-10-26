@@ -6,7 +6,7 @@
 /*   By: cnatanae <cnatanae@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/13 14:18:31 by cnatanae          #+#    #+#             */
-/*   Updated: 2023/10/19 05:13:55 by cnatanae         ###   ########.fr       */
+/*   Updated: 2023/10/23 14:23:04 by cnatanae         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,33 +26,28 @@ static int	ft_isspace(const char *nptr)
 	return (idx);
 }
 
-static char	ft_odd(char c)
+static int	ft_odd(char c)
 {
-	char	odd;
+	int	odd;
 
-	odd = '+';
+	odd = 1;
 	if (c == '-')
-		odd = '-';
+		odd = -1;
 	return (odd);
 }
 
 int	ft_atoi(const char *nptr)
 {
-	char	odd;
-	int		value;
-	int		idx;
+	int	odd;
+	int	value;
+	int	idx;
 
+	value = 0;
 	idx = ft_isspace(nptr);
 	odd = ft_odd(nptr[idx]);
 	if (nptr[idx] == '+' || nptr[idx] == '-')
 		idx++;
-	value = 0;
-	while (nptr[idx] >= 48 && nptr[idx] <= 57)
-	{
-		value = value * 10 + (nptr[idx] - '0');
-		idx++;
-	}
-	if (odd == '-')
-		return (value * -1);
-	return (value);
+	while (nptr[idx] >= '0' && nptr[idx] <= '9')
+		value = value * 10 + (nptr[idx++] - '0');
+	return (value * odd);
 }
