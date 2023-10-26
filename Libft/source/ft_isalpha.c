@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_isalpha.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cnatanae <cnatanae@student.42.fr>          +#+  +:+       +#+        */
+/*   By: cnatanae <cnatanae@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/07 14:40:10 by cnatanae          #+#    #+#             */
-/*   Updated: 2023/10/09 07:24:32 by cnatanae         ###   ########.fr       */
+/*   Updated: 2023/10/24 08:29:36 by cnatanae         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,12 +14,5 @@
 
 int	ft_isalpha(int c)
 {
-	if ((c >= 'a' && c <= 'z') || (c >= 'A' && c <= 'Z'))
-	{
-		return (1024);
-	}
-	else
-	{
-		return (0);
-	}
+	return ((c >= 'a' && c <= 'z') || (c >= 'A' && c <= 'Z'));
 }
