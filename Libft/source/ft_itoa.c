@@ -6,7 +6,7 @@
 /*   By: cnatanae <cnatanae@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/19 08:06:19 by cnatanae          #+#    #+#             */
-/*   Updated: 2023/10/19 11:33:08 by cnatanae         ###   ########.fr       */
+/*   Updated: 2023/10/23 19:20:23 by cnatanae         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ char	*ft_itoa(int n)
 	long int	size;
 
 	size = ft_size(n);
-	value = (char *)malloc((size + 1) * sizeof(char));
+	value = (char *)ft_calloc((size + 1), sizeof(char));
 	if (!value)
 		return (NULL);
 	value[size--] = '\0';
