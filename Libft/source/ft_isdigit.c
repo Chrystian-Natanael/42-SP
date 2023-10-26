@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_isdigit.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: cnatanae <cnatanae@student.42.fr>          +#+  +:+       +#+        */
+/*   By: cnatanae <cnatanae@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/09 05:06:49 by cnatanae          #+#    #+#             */
-/*   Updated: 2023/10/09 07:20:57 by cnatanae         ###   ########.fr       */
+/*   Updated: 2023/10/24 08:29:05 by cnatanae         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,12 +14,5 @@
 
 int	ft_isdigit(int c)
 {
-	if (c >= '0' && c <= '9')
-	{
-		return (2048);
-	}
-	else
-	{
-		return (0);
-	}
+	return (c >= '0' && c <= '9');
 }
