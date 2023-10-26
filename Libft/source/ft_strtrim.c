@@ -6,7 +6,7 @@
 /*   By: cnatanae <cnatanae@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/16 13:53:17 by cnatanae          #+#    #+#             */
-/*   Updated: 2023/10/19 07:09:40 by cnatanae         ###   ########.fr       */
+/*   Updated: 2023/10/25 16:51:09 by cnatanae         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,5 @@ char	*ft_strtrim(char const *s1, char const *set)
 		return (NULL);
 	while (start < end)
 		nstr[idx++] = s1[start++];
-	nstr[idx] = '\0';
 	return (nstr);
 }
