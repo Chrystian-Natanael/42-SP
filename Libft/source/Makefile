@@ -65,7 +65,7 @@ bonus: $(BFILES)
 	ar rvc $(NAME) $(BOFILES) $(OFILES)
 
 clean:
-	rm -f $(OFILES)
+	rm -f $(OFILES) $(BOFILES)
 
 fclean: clean
 	rm -f $(NAME) $(BOFILES)
