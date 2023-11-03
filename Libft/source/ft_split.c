@@ -6,7 +6,7 @@
 /*   By: cnatanae <cnatanae@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/17 09:17:44 by cnatanae          #+#    #+#             */
-/*   Updated: 2023/10/23 19:22:29 by cnatanae         ###   ########.fr       */
+/*   Updated: 2023/11/02 13:52:32 by cnatanae         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ static int	ft_size(char *s, char c)
 	int		i;
 
 	i = 0;
-	while (s[i] != c)
+	while (s[i] != c && s[i])
 		i++;
 	return (i);
 }
@@ -50,7 +50,7 @@ static char	*ft_put_letter(char *s, char c)
 	str = (char *)ft_calloc(1, sizeof(char) * ft_size(s, c) + 1);
 	if (!str)
 		return (NULL);
-	while (s[i] != c)
+	while (s[i] != c && s[i])
 	{
 		str[i] = s[i];
 		i++;
