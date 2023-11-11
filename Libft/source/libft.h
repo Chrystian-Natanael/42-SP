@@ -6,7 +6,7 @@
 /*   By: cnatanae <cnatanae@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/07 14:41:11 by cnatanae          #+#    #+#             */
-/*   Updated: 2023/11/03 09:55:45 by cnatanae         ###   ########.fr       */
+/*   Updated: 2023/11/11 12:27:10 by cnatanae         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,11 @@
 # include <stdlib.h>
 # include <unistd.h>
 
+/**@brief This structure is a linked list.
+ * 
+ * @param content The data contained in the node.
+ * @param next The pointer to the next node.
+*/
 typedef struct s_list
 {
 	void			*content;
