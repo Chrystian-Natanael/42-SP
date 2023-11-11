@@ -6,7 +6,7 @@
 /*   By: cnatanae <cnatanae@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/17 09:17:44 by cnatanae          #+#    #+#             */
-/*   Updated: 2023/11/02 13:52:32 by cnatanae         ###   ########.fr       */
+/*   Updated: 2023/11/11 12:20:52 by cnatanae         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,6 +58,16 @@ static char	*ft_put_letter(char *s, char c)
 	return (str);
 }
 
+void	ft_free(char **split)
+{
+	int	idx;
+
+	idx = 0;
+	while (split[idx])
+		free(split[idx++]);
+	free(split);
+}
+
 char	**ft_split(char const *s, char c)
 {
 	int		idx_b;
@@ -74,7 +84,7 @@ char	**ft_split(char const *s, char c)
 			split[idx_b] = ft_put_letter((char *)s, c);
 			if (!split[idx_b++])
 			{
-				free (split);
+				ft_free(split);
 				return (NULL);
 			}
 			while (*s != c && *s)
