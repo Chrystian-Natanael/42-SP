@@ -1,4 +1,5 @@
 NAME := libft.a
+SHELL := /bin/bash
 
 GREEN = \033[32m
 YELLOW = \033[33m
@@ -41,10 +42,7 @@ SRCS := ft_isalpha.c\
 	ft_putstr_fd.c\
 	ft_putendl_fd.c\
 	ft_putnbr_fd.c\
-	get_next_line.c\
-	get_next_line_utils.c
-
-SRCS_BONUS := ft_lstnew.c\
+	ft_lstnew.c\
 	ft_lstadd_front.c\
 	ft_lstsize.c\
 	ft_lstlast.c\
@@ -52,42 +50,42 @@ SRCS_BONUS := ft_lstnew.c\
 	ft_lstdelone.c\
 	ft_lstclear.c\
 	ft_lstiter.c\
-	ft_lstmap.c
+	ft_lstmap.c\
+	get_next_line.c\
+	get_next_line_utils.c\
 
 OBJS := $(SRCS:.c=.o)
 
-OBJS_BONUS	:= $(SRCS_BONUS:.c=.o)
-
 CC := cc
 
-CFLAGS := -Wall -Wextra -Werror -g3
+CFLAGS := -Wall -Wextra -Werror -g3 -O3
 
 AR := ar -rcs
 
 RM := rm -rf
 
+COUNT := 0
+
 all:	$(NAME)
-	@echo "$(GREEN)[COMPILED] - OK $(FCOLOR)"
+	@printf "\n$(GREEN)[COMPILED] - OK $(FCOLOR)"
+
 %.o:%.c
-	$(CC) $(CFLAGS) -c $< -o $@
-	@echo "$(YELLOW)[COMPILING] $(FCOLOR)" $<
-	@sleep 0.2
-	$(AR) $(NAME) $@
+	@sleep 0.0
+	@$(eval COUNT=$(shell expr $(COUNT) + 1))
+	@$(CC) $(CFLAGS) -c $< -o $@
+	@printf "Compiling $(YELLOW)LIBFT %d%%\r$(FCOLOR)" $$(echo $$(($(COUNT) * 100 / $(words $(SRCS)))))
+	@$(AR) $(NAME) $@
 
 $(NAME):	$(OBJS)
 
-bonus:	$(OBJS_BONUS)
-	@echo "$(PURPLE)[COMPILING] BONUS $(FCOLOR)"
-
 clean:
-	@echo "$(RED)[CLEANING] $(FCOLOR)"
-	$(RM) $(OBJS) $(OBJS_BONUS)
-	@echo "$(GREEN)[CLEANED] - OK $(FCOLOR)"
+	@printf "$(RED)[CLEANING - Objects] $(FCOLOR)\n"
+	@$(RM) $(OBJS) $(OBJS_BONUS)
+	@printf "$(GREEN)[CLEANED] - OK$(FCOLOR)\n"
 
 fclean:	clean
-	$(RM) $(NAME)
+	@$(RM) $(NAME)
 
 re:	fclean all
-	@echo "$(GREEN)[RECOMPILED] - OK $(FCOLOR)"
 
 .PHONY:	all clean fclean re bonus
