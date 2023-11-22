@@ -8,7 +8,10 @@ RED = \033[31m
 WHITE = \033[37m
 FCOLOR = \033[0m
 
-SRCS := ft_isalpha.c\
+PATHSRC := ./source/
+PATHOBJ := ./obj/
+MKDIR := mkdir -p
+SRCS := $(addprefix $(PATHSRC), ft_isalpha.c\
 	ft_isdigit.c\
 	ft_strlen.c\
 	ft_isalnum.c\
@@ -52,13 +55,13 @@ SRCS := ft_isalpha.c\
 	ft_lstiter.c\
 	ft_lstmap.c\
 	get_next_line.c\
-	get_next_line_utils.c\
+	get_next_line_utils.c)
 
-OBJS := $(SRCS:.c=.o)
+OBJS := $(SRCS:%.c=$(PATHOBJ)%.o)
 
 CC := cc
 
-CFLAGS := -Wall -Wextra -Werror -g3 -O3
+CFLAGS := -Wall -Wextra -Werror -g3 -O3 -Ofast -flto
 
 AR := ar -rcs
 
@@ -67,9 +70,10 @@ RM := rm -rf
 COUNT := 0
 
 all:	$(NAME)
-	@printf "\n$(GREEN)[COMPILED] - OK $(FCOLOR)"
+	@printf "$(GREEN)[COMPILED] - OK $(FCOLOR)"
 
-%.o:%.c
+$(PATHOBJ)%.o:%.c
+	@$(MKDIR) $(dir $@)
 	@sleep 0.0
 	@$(eval COUNT=$(shell expr $(COUNT) + 1))
 	@$(CC) $(CFLAGS) -c $< -o $@
@@ -80,7 +84,7 @@ $(NAME):	$(OBJS)
 
 clean:
 	@printf "$(RED)[CLEANING - Objects] $(FCOLOR)\n"
-	@$(RM) $(OBJS) $(OBJS_BONUS)
+	@$(RM) $(PATHOBJ)
 	@printf "$(GREEN)[CLEANED] - OK$(FCOLOR)\n"
 
 fclean:	clean
