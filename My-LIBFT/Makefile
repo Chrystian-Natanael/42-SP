@@ -17,8 +17,9 @@ FCOLOR = \033[0m
 # ! --------------------------------------------------------------------------------------------------------------------------------
 # ! PATH
 
-PATHSRC := ./source/
-PATHOBJ := ./obj/
+PATHSRC := source/
+PATHOBJ := obj/
+PATCHINLCUDE := include/
 
 # ! --------------------------------------------------------------------------------------------------------------------------------
 # ! COMMANDS
@@ -79,9 +80,9 @@ SRCS := $(addprefix $(PATHSRC), \
 	get_next_line.c\
 	get_next_line_utils.c)
 
-OBJS := $(SRCS:%.c=$(PATHOBJ)%.o)
+OBJS += $(SRCS:%.c=$(PATHOBJ)%.o)
 
-CFLAGS := -Wall -Wextra -Werror -g3 -O3 -Ofast -flto
+CFLAGS := -Wall -Wextra -Werror -g3 -Ofast -flto
 
 # ! --------------------------------------------------------------------------------------------------------------------------------
 # ! OTHER VARIABLES
@@ -96,13 +97,13 @@ all:	$(NAME)
 
 $(PATHOBJ)%.o:%.c
 	@$(MKDIR) $(dir $@)
-	@sleep 0.0
+	@sleep 0.01
 	@$(eval COUNT=$(shell expr $(COUNT) + 1))
-	@$(CC) $(CFLAGS) -c $< -o $@
+	$(CC) $(CFLAGS) -I$(PATCHINLCUDE) -lft -c $< -o $@
 	@printf "Compiling $(YELLOW)LIBFT %d%%\r$(FCOLOR)" $$(echo $$(($(COUNT) * 100 / $(words $(SRCS)))))
-	@$(AR) $(NAME) $@
 
 $(NAME):	$(OBJS)
+	@$(AR) $(NAME) $(OBJS) $@
 
 clean:
 	@printf "$(RED)[CLEANING - Objects] $(FCOLOR)\n"
