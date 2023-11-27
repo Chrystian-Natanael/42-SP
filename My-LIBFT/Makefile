@@ -17,9 +17,9 @@ FCOLOR = \033[0m
 # ! --------------------------------------------------------------------------------------------------------------------------------
 # ! PATH
 
-PATHSRC := source/
-PATHOBJ := obj/
-PATCHINLCUDE := include/
+PATHSRC = source
+PATHOBJ = obj
+PATCHINLCUDE = include/
 
 # ! --------------------------------------------------------------------------------------------------------------------------------
 # ! COMMANDS
@@ -33,56 +33,55 @@ RM := rm -rf
 # ! --------------------------------------------------------------------------------------------------------------------------------
 # ! FILES
 
-SRCS := $(addprefix $(PATHSRC), \
-	ft_isalpha.c\
-	ft_isdigit.c\
-	ft_strlen.c\
-	ft_isalnum.c\
-	ft_isascii.c\
-	ft_isprint.c\
-	ft_memset.c\
-	ft_bzero.c\
-	ft_memcpy.c\
-	ft_memmove.c\
-	ft_strlcpy.c\
-	ft_strlcat.c\
-	ft_toupper.c\
-	ft_tolower.c\
-	ft_strchr.c\
-	ft_strrchr.c\
-	ft_strncmp.c\
-	ft_memchr.c\
-	ft_memcmp.c\
-	ft_strnstr.c\
-	ft_atoi.c\
-	ft_calloc.c\
-	ft_strdup.c\
-	ft_substr.c\
-	ft_strjoin.c\
-	ft_strtrim.c\
-	ft_split.c\
-	ft_itoa.c\
-	ft_strmapi.c\
-	ft_striteri.c\
-	ft_putchar_fd.c\
-	ft_putstr_fd.c\
-	ft_putendl_fd.c\
-	ft_putnbr_fd.c\
-	ft_lstnew.c\
-	ft_lstadd_front.c\
-	ft_lstsize.c\
-	ft_lstlast.c\
-	ft_lstadd_back.c\
-	ft_lstdelone.c\
-	ft_lstclear.c\
-	ft_lstiter.c\
-	ft_lstmap.c\
-	get_next_line.c\
-	get_next_line_utils.c)
+SRCS := ft_isalpha.c \
+	ft_isdigit.c \
+	ft_strlen.c \
+	ft_isalnum.c \
+	ft_isascii.c \
+	ft_isprint.c \
+	ft_memset.c \
+	ft_bzero.c \
+	ft_memcpy.c \
+	ft_memmove.c \
+	ft_strlcpy.c \
+	ft_strlcat.c \
+	ft_toupper.c \
+	ft_tolower.c \
+	ft_strchr.c \
+	ft_strrchr.c \
+	ft_strncmp.c \
+	ft_memchr.c \
+	ft_memcmp.c \
+	ft_strnstr.c \
+	ft_atoi.c \
+	ft_calloc.c \
+	ft_strdup.c \
+	ft_substr.c \
+	ft_strjoin.c \
+	ft_strtrim.c \
+	ft_split.c \
+	ft_itoa.c \
+	ft_strmapi.c \
+	ft_striteri.c \
+	ft_putchar_fd.c \
+	ft_putstr_fd.c \
+	ft_putendl_fd.c \
+	ft_putnbr_fd.c \
+	ft_lstnew.c \
+	ft_lstadd_front.c \
+	ft_lstsize.c \
+	ft_lstlast.c \
+	ft_lstadd_back.c \
+	ft_lstdelone.c \
+	ft_lstclear.c \
+	ft_lstiter.c \
+	ft_lstmap.c \
+	get_next_line.c \
+	get_next_line_utils.c
 
-OBJS += $(SRCS:%.c=$(PATHOBJ)%.o)
+OBJS = $(patsubst %, $(PATHOBJ)/%, $(notdir $(SRCS:.c=.o)))
 
-CFLAGS := -Wall -Wextra -Werror -g3 -Ofast -flto
+CFLAGS := -Wall -Wextra -Werror -g3 -Ofast
 
 # ! --------------------------------------------------------------------------------------------------------------------------------
 # ! OTHER VARIABLES
@@ -92,18 +91,20 @@ COUNT := 0
 # ! --------------------------------------------------------------------------------------------------------------------------------
 # ! RULES 
 
-all:	$(NAME)
-	@printf "$(GREEN)[COMPILED] - OK $(FCOLOR)"
+all: $(PATHOBJ) $(NAME)
 
-$(PATHOBJ)%.o:%.c
-	@$(MKDIR) $(dir $@)
-	@sleep 0.01
+$(PATHOBJ):
+	@$(MKDIR) $@
+
+$(PATHOBJ)/%.o: $(PATHSRC)/%.c 
 	@$(eval COUNT=$(shell expr $(COUNT) + 1))
 	@$(CC) $(CFLAGS) -I$(PATCHINLCUDE) -c $< -o $@
 	@printf "Compiling $(YELLOW)LIBFT %d%%\r$(FCOLOR)" $$(echo $$(($(COUNT) * 100 / $(words $(SRCS)))))
 
-$(NAME):	$(OBJS)
-	@$(AR) $(NAME) $(OBJS) $@
+$(NAME): $(OBJS)
+	@$(AR) $@ $?
+	@sleep 0.01
+	@printf "$(GREEN)[COMPILED] - OK $(FCOLOR)"
 
 clean:
 	@printf "$(RED)[CLEANING - Objects] $(FCOLOR)\n"
