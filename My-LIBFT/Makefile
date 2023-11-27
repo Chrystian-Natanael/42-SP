@@ -99,7 +99,7 @@ $(PATHOBJ)%.o:%.c
 	@$(MKDIR) $(dir $@)
 	@sleep 0.01
 	@$(eval COUNT=$(shell expr $(COUNT) + 1))
-	$(CC) $(CFLAGS) -I$(PATCHINLCUDE) -lft -c $< -o $@
+	@$(CC) $(CFLAGS) -I$(PATCHINLCUDE) -c $< -o $@
 	@printf "Compiling $(YELLOW)LIBFT %d%%\r$(FCOLOR)" $$(echo $$(($(COUNT) * 100 / $(words $(SRCS)))))
 
 $(NAME):	$(OBJS)
