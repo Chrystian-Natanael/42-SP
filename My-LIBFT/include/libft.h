@@ -17,6 +17,9 @@
 # include <unistd.h>
 # include "get_next_line.h"
 
+# define HEXAMIN "0123456789abcdef"
+# define HEXAMAX "0123456789ABCDEF"
+
 /**@brief This structure is a linked list.
  * 
  * @param content The data contained in the node.
