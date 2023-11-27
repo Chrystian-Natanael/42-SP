@@ -104,7 +104,7 @@ $(PATHOBJ)/%.o: $(PATHSRC)/%.c
 $(NAME): $(OBJS)
 	@$(AR) $@ $?
 	@sleep 0.01
-	@printf "$(GREEN)[COMPILED] - OK $(FCOLOR)"
+	@printf "$(GREEN)[COMPILED] - OK $(FCOLOR)\n"
 
 clean:
 	@printf "$(RED)[CLEANING - Objects] $(FCOLOR)\n"
@@ -112,6 +112,7 @@ clean:
 	@printf "$(GREEN)[CLEANED] - OK$(FCOLOR)\n"
 
 fclean:	clean
+	@$(RM) $(PATHOBJ)
 	@$(RM) $(NAME)
 
 re:	fclean all
