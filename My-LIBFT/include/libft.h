@@ -6,7 +6,7 @@
 /*   By: cnatanae <cnatanae@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/07 14:41:11 by cnatanae          #+#    #+#             */
-/*   Updated: 2023/11/22 15:44:02 by cnatanae         ###   ########.fr       */
+/*   Updated: 2023/11/27 12:19:41 by cnatanae         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -411,5 +411,13 @@ void	ft_lstiter(t_list *lst, void (*f)(void *));
  * @return The pointer to the new list
 */
 t_list	*ft_lstmap(t_list *lst, void *(*f)(void *), void (*del)(void *));
+
+/**@brief This function print a number in a specify base
+ * 
+ * @param num num to be printed
+ * @param base base to printed number
+ * @return Number of characters printed
+*/
+int	ft_putnbr_base(long long num, int base);
 
 #endif
