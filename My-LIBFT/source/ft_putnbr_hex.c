@@ -1,18 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_putnbr_base.c                                   :+:      :+:    :+:   */
+/*   ft_putnbr_hex.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: cnatanae <cnatanae@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/11/27 12:16:42 by cnatanae          #+#    #+#             */
-/*   Updated: 2023/11/27 12:17:30 by cnatanae         ###   ########.fr       */
+/*   Created: 2023/11/27 12:20:52 by cnatanae          #+#    #+#             */
+/*   Updated: 2023/12/02 18:35:11 by cnatanae         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "../include/libft.h"
 
-int	ft_putnbr_base(long long num, int base)
+int	ft_putnbr_hex(long long num)
 {
 	int			count;
 
@@ -22,10 +22,8 @@ int	ft_putnbr_base(long long num, int base)
 		count += ft_putchar_fd('-', 1);
 		num = -num;
 	}
-	if (num >= (long long)base)
-	{
-		count += ft_putnbr_base(num / base, base, min_max);
-	}
-	count += ft_putchar_fd(HEXAMAX[num % base], 1);
+	if (num >= 16)
+		count += ft_putnbr_hex(num / 16);
+	count += ft_putchar_fd(HEXAMIN[num % 16], 1);
 	return (count);
 }

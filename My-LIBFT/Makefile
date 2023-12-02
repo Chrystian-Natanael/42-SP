@@ -78,7 +78,7 @@ SRCS := ft_isalpha.c \
 	ft_lstmap.c \
 	get_next_line.c \
 	get_next_line_utils.c \
-	ft_putnbr_base.c
+	ft_putnbr_hex.c
 
 OBJS = $(patsubst %, $(PATHOBJ)/%, $(notdir $(SRCS:.c=.o)))
 
@@ -87,12 +87,14 @@ CFLAGS := -Wall -Wextra -Werror -g3 -Ofast
 # ! --------------------------------------------------------------------------------------------------------------------------------
 # ! OTHER VARIABLES
 
-COUNT := 0
+COUNT = 0
 
 # ! --------------------------------------------------------------------------------------------------------------------------------
 # ! RULES 
 
 all: $(PATHOBJ) $(NAME)
+	@sleep 0.01
+	@printf "\n$(GREEN)COMPILED:$(FCOLOR)$(PURPLE) $(NAME)$(FCOLOR)\n"
 
 $(PATHOBJ):
 	@$(MKDIR) $@
@@ -105,16 +107,14 @@ $(PATHOBJ)/%.o: $(PATHSRC)/%.c
 $(NAME): $(OBJS)
 	@$(AR) $@ $?
 	@sleep 0.01
-	@printf "$(GREEN)[COMPILED] - OK $(FCOLOR)\n"
 
 clean:
-	@printf "$(RED)[CLEANING - Objects] $(FCOLOR)\n"
 	@$(RM) $(PATHOBJ)
-	@printf "$(GREEN)[CLEANED] - OK$(FCOLOR)\n"
+	@printf "$(RED)CLEANED FILES:$(FCOLOR)$(PURPLE) .o$(FCOLOR)\n"
 
 fclean:	clean
-	@$(RM) $(PATHOBJ)
 	@$(RM) $(NAME)
+	@printf "$(RED)CLEANED LIB:$(FCOLOR)$(PURPLE) $(NAME)$(FCOLOR)\n"
 
 re:	fclean all
 

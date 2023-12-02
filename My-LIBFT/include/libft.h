@@ -6,7 +6,7 @@
 /*   By: cnatanae <cnatanae@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/07 14:41:11 by cnatanae          #+#    #+#             */
-/*   Updated: 2023/11/27 12:19:41 by cnatanae         ###   ########.fr       */
+/*   Updated: 2023/12/02 18:37:06 by cnatanae         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -301,7 +301,7 @@ void	ft_striteri(char *s, void (*f)(unsigned int, char *));
  * @param fd a file descriptor
  * @return void
 */
-void	ft_putchar_fd(char c, int fd);
+int		ft_putchar_fd(char c, int fd);
 
 /**@brief this function Outputs the string ’s’ to the given file
  * descriptor.
@@ -310,7 +310,7 @@ void	ft_putchar_fd(char c, int fd);
  * @param fd a file descriptor
  * @return void
 */
-void	ft_putstr_fd(char *s, int fd);
+int		ft_putstr_fd(char *s, int fd);
 
 /**@brief this function Outputs the string ’s’ to the given file descriptor
  * followed by a newline.
@@ -415,12 +415,11 @@ void	ft_lstiter(t_list *lst, void (*f)(void *));
 */
 t_list	*ft_lstmap(t_list *lst, void *(*f)(void *), void (*del)(void *));
 
-/**@brief This function print a number in a specify base
+/**@brief This function print a number in a base 16 (hexadecimal)
  * 
  * @param num num to be printed
- * @param base base to printed number
  * @return Number of characters printed
 */
-int	ft_putnbr_base(long long num, int base);
+int	ft_putnbr_hex(long long num);
 
 #endif
