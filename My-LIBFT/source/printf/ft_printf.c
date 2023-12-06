@@ -1,29 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_putnbr_hex.c                                    :+:      :+:    :+:   */
+/*   ft_printf.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: cnatanae <cnatanae@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/11/27 12:20:52 by cnatanae          #+#    #+#             */
-/*   Updated: 2023/12/02 18:35:11 by cnatanae         ###   ########.fr       */
+/*   Created: 2023/11/27 09:15:44 by cnatanae          #+#    #+#             */
+/*   Updated: 2023/12/06 12:22:00 by cnatanae         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/libft.h"
+#include "ft_printf.h"
 
-int	ft_putnbr_hex(long long num)
+int	ft_printf(const char *format, ...)
 {
-	int			count;
+	va_list	ap;
 
-	count = 0;
-	if (num < 0)
-	{
-		count += ft_putchar_fd('-', 1);
-		num = -num;
-	}
-	if (num >= 16)
-		count += ft_putnbr_hex(num / 16);
-	count += ft_putchar_fd(HEXAMIN[num % 16], 1);
-	return (count);
+	if (!format)
+		return (0);
+	va_start(ap, format);
+	return (ft_print_build(format, ap));
 }

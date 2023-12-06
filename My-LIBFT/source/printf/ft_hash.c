@@ -1,33 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_putnbr_fd.c                                     :+:      :+:    :+:   */
+/*   ft_hash.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: cnatanae <cnatanae@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/10/20 11:52:43 by cnatanae          #+#    #+#             */
-/*   Updated: 2023/10/23 19:04:24 by cnatanae         ###   ########.fr       */
+/*   Created: 2023/12/04 09:20:32 by cnatanae          #+#    #+#             */
+/*   Updated: 2023/12/06 12:25:36 by cnatanae         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "../include/ft_printf.h"
+#include "../include/libft.h"
 
-void	ft_putnbr_fd(int n, int fd)
+int	ft_hash(const char *format, va_list ap)
 {
-	long int	nb;
+	long long int	value;
 
-	nb = n;
-	if (nb < 0)
-	{
-		ft_putchar_fd('-', fd);
-		nb = -nb;
-	}
-	if (nb < 10)
-	{
-		ft_putchar_fd (nb + '0', fd);
-		return ;
-	}
-	else
-		ft_putnbr_fd(nb / 10, fd);
-	ft_putnbr_fd (nb % 10, fd);
+	value = (t_lolo)va_arg(ap, t_uni);
+	if (value == 0)
+		return (ft_putstr_fd("0", 1));
+	if (*format == 'x')
+		return (ft_putstr_fd("0x", 1) + ft_putnbr_hex(value, HEXAMIN));
+	else if (*format == 'X')
+		return (ft_putstr_fd("0X", 1) + ft_putnbr_hex(value, HEXAMAX));
+	return (0);
 }

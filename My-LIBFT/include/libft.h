@@ -6,7 +6,7 @@
 /*   By: cnatanae <cnatanae@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/07 14:41:11 by cnatanae          #+#    #+#             */
-/*   Updated: 2023/12/02 18:37:06 by cnatanae         ###   ########.fr       */
+/*   Updated: 2023/12/06 13:03:41 by cnatanae         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 # include <stdlib.h>
 # include <unistd.h>
 # include "get_next_line.h"
+# include "ft_printf.h"
 
 # define HEXAMIN "0123456789abcdef"
 # define HEXAMAX "0123456789ABCDEF"
@@ -418,8 +419,9 @@ t_list	*ft_lstmap(t_list *lst, void *(*f)(void *), void (*del)(void *));
 /**@brief This function print a number in a base 16 (hexadecimal)
  * 
  * @param num num to be printed
+ * @param base base to be printed
  * @return Number of characters printed
 */
-int	ft_putnbr_hex(long long num);
+int		ft_putnbr_hex(long long num, char *base);
 
 #endif
