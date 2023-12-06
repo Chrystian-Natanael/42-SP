@@ -144,5 +144,3 @@ fclean:	clean
 	@printf "$(RED)CLEANED LIB:$(FCOLOR)$(PURPLE) $(NAME)$(FCOLOR)\n"
 
 re:	fclean all
-
-bonus: all
