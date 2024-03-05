@@ -4,18 +4,30 @@
 
 NAME = 
 .DEFAULT_GOAL := all
-.PHONY: all clean fclean re
+.PHONY: all clean fclean re help
 .SILENT:
 
 #! ******************************************************************************#
 #                                   COLORS                                       #
 #! ******************************************************************************#
 
-GREEN = \033[32m
-YELLOW = \033[33m
-PURPLE = \033[35m
-RED = \033[31m
-WHITE = \033[37m
+DEFAULT=\033[39m
+BLACK=\033[30m
+DARK_RED=\033[31m
+DARK_GREEN=\033[32m
+DARK_YELLOW=\033[33m
+DARK_BLUE=\033[34m
+DARK_MAGENTA=\033[35m
+DARK_CYAN=\033[36m
+LIGHT_GRAY=\033[37m
+DARK_GRAY=\033[90m
+RED=\033[91m
+GREEN=\033[92m
+ORANGE=\033[93m
+BLUE=\033[94m
+MAGENTA=\033[95m
+CYAN=\033[96m
+WHITE=\033[97m
 RESET = \033[0m
 
 #! ******************************************************************************#
@@ -34,8 +46,8 @@ LIBFT_DIR :=
 SRCS =	$(addprefix $(SRCS_PATH),\
 		file01 \
 		file02 \
-		file03
-LIBFT = $(addprefix $(LIBFT_DIR), libft.a)
+		file03)
+# LIBFT = $(addprefix $(LIBFT_DIR), libft.a)
 LIBS := $(LIBFT_DIR)libft.a
 OBJS = $(SRCS:%.c=$(BUILD_DIR)%.o)
 DEPS = $(OBJS:.o=.d)
@@ -48,12 +60,13 @@ MKDIR := mkdir -p
 RM := rm -rf
 SLEEP = sleep 0.1
 CC = cc
+SHELL := /bin/bash
 
 #! ******************************************************************************#
 #                                 FLAGS E COMP                                   #
 #! ******************************************************************************#
 
-CFLAGS = -Wall -Wextra -Werror -g3
+CFLAGS = -Wall -Wextra -Werror
 DFLAGS = -Wall -Wextra -Werror -g3 -fsanitize=address
 LDLIBS = -lft -ldl -lglfw -pthread
 LDFLAGS = $(addprefix -L,$(dir $(LIBS)))
@@ -87,6 +100,20 @@ define comp_exe
 	printf "$(GREEN)PROGRAM ->$(RESET)$(PURPLE) READY\n$(RESET)"
 endef
 
+define help
+	echo "${DARK_RED}Available targets:${RESET}"
+	printf "\n"
+	echo "${DARK_BLUE}all:${RESET} ${LIGHT_GRAY}Build push swap${RESET}"
+	echo "${DARK_BLUE}both:${RESET} ${LIGHT_GRAY}Build push swap and checker${RESET}"
+	echo "${DARK_BLUE}bonus:${RESET} ${LIGHT_GRAY}Build checker${RESET}"
+	echo "${DARK_BLUE}re:${RESET} ${LIGHT_GRAY}Rebuild the program${RESET}"
+	echo "${DARK_BLUE}clean:${RESET} ${LIGHT_GRAY}Remove the object files${RESET}"
+	echo "${DARK_BLUE}fclean:${RESET} ${LIGHT_GRAY}Remove the program and the object files${RESET}"
+	echo "${DARK_BLUE}debug:${RESET} ${LIGHT_GRAY}Build the program with debugging information${RESET}"
+	echo "${DARK_BLUE}case:${RESET} ${LIGHT_GRAY}Show numbers with best and worst case${RESET}"
+	echo "${DARK_BLUE}test_nb:${RESET} ${LIGHT_GRAY}Test the program with provided list length${RESET}"
+endef
+
 #! ******************************************************************************#
 #                                   TARGETS                                      #
 #! ******************************************************************************#
@@ -112,5 +139,8 @@ fclean: clean
 	$(MAKE) -C $(LIBFT_DIR) fclean
 
 re: fclean all
+
+help:
+	$(call help)
 
 -include $(DEPS)
