@@ -1,24 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstnewelement.c                                 :+:      :+:    :+:   */
+/*   ft_dolstadd_back.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: cnatanae <cnatanae@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/03/09 14:09:05 by cnatanae          #+#    #+#             */
-/*   Updated: 2024/03/09 18:14:50 by cnatanae         ###   ########.fr       */
+/*   Created: 2024/03/09 15:52:01 by cnatanae          #+#    #+#             */
+/*   Updated: 2024/03/09 18:13:27 by cnatanae         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-t_element	*ft_lstnewelement(void *content)
+void	ft_dolstadd_back(t_dolist **lst, t_element *new)
 {
-	t_element	*el;
+	t_element	*aux;
 
-	el = ft_calloc(1, sizeof(t_element));
-	if (el == NULL)
-		return (NULL);
-	el->content = content;
-	return (el);
+	aux = (*lst)->first;
+	if (aux == NULL)
+	{
+		(*lst)->first = new;
+		return ;
+	}
+	while (aux->next)
+		aux = aux->next;
+	aux->next = new;
 }
