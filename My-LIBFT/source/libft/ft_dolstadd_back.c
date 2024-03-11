@@ -6,7 +6,7 @@
 /*   By: cnatanae <cnatanae@student.42sp.org.br>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/03/09 15:52:01 by cnatanae          #+#    #+#             */
-/*   Updated: 2024/03/09 18:13:27 by cnatanae         ###   ########.fr       */
+/*   Updated: 2024/03/11 17:05:35 by cnatanae         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,4 +25,5 @@ void	ft_dolstadd_back(t_dolist **lst, t_element *new)
 	while (aux->next)
 		aux = aux->next;
 	aux->next = new;
+	(*lst)->last = new;
 }
