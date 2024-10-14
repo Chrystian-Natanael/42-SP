@@ -47,7 +47,7 @@ LIBFT_DIR := #! INSERT LIBFT PATH IN USE CASE
 
 LIBS := $(LIBFT_DIR)libft.a #! REMOVE IN NON USE CASE
 SRCS = $(wildcard $(SRCS_PATH)*$(FILE_EXTENSION))
-OBJS = $(SRCS:%.$(FILE_EXTENSION)=$(BUILD_DIR)%.o)
+OBJS = $(SRCS:%$(FILE_EXTENSION)=$(BUILD_DIR)%.o)
 DEPS = $(OBJS:.o=.d)
 
 #* ******************************************************************************#
