@@ -1,15 +1,16 @@
-#! ******************************************************************************#
+#* ******************************************************************************#
 #                                   NAME                                         #
-#! ******************************************************************************#
+#* ******************************************************************************#
 
-NAME = 
+NAME = #! INSERT NAME
+FILE_EXTENSION = #! INSER FILE EXTENSION
 .DEFAULT_GOAL := all
-.PHONY: all clean fclean re help
+.PHONY: all clean fclean re tests help
 .SILENT:
 
-#! ******************************************************************************#
+#* ******************************************************************************#
 #                                   COLORS                                       #
-#! ******************************************************************************#
+#* ******************************************************************************#
 
 DEFAULT=\033[39m
 BLACK=\033[30m
@@ -30,53 +31,50 @@ CYAN=\033[96m
 WHITE=\033[97m
 RESET = \033[0m
 
-#! ******************************************************************************#
+#* ******************************************************************************#
 #                                   PATH                                         #
-#! ******************************************************************************#
+#* ******************************************************************************#
 
-SRCS_PATH = 
-INCS_PATH = 
-BUILD_DIR := 
-LIBFT_DIR := 
+SRCS_PATH = #! INSERT SRC PATH
+INCS_PATH = #! INSERT INCLUDES PATH
+BUILD_DIR := #! INSERT BUILD PATH
+TARGET_DIR = #! INSERT BIN PATH
+LIBFT_DIR := #! INSERT LIBFT PATH IN USE CASE
 
-#! ******************************************************************************#
+#* ******************************************************************************#
 #                                   FILES                                        #
-#! ******************************************************************************#
+#* ******************************************************************************#
 
-SRCS =	$(addprefix $(SRCS_PATH),\
-		file01 \
-		file02 \
-		file03)
-# LIBFT = $(addprefix $(LIBFT_DIR), libft.a)
-LIBS := $(LIBFT_DIR)libft.a
-OBJS = $(SRCS:%.c=$(BUILD_DIR)%.o)
+LIBS := $(LIBFT_DIR)libft.a #! REMOVE IN NON USE CASE
+SRCS = $(wildcard $(SRCS_PATH)*$(FILE_EXTENSION))
+OBJS = $(SRCS:%.$(FILE_EXTENSION)=$(BUILD_DIR)%.o)
 DEPS = $(OBJS:.o=.d)
 
-#! ******************************************************************************#
+#* ******************************************************************************#
 #                                    COMMANDS                                    #
-#! ******************************************************************************#
+#* ******************************************************************************#
 
 MKDIR := mkdir -p
 RM := rm -rf
 SLEEP = sleep 0.1
-CC = cc
+COMP = c++ #! INSERT C OR CPP COMPILER
 SHELL := /bin/bash
 
-#! ******************************************************************************#
+#* ******************************************************************************#
 #                                 FLAGS E COMP                                   #
-#! ******************************************************************************#
+#* ******************************************************************************#
 
-CFLAGS = -Wall -Wextra -Werror
-DFLAGS = -Wall -Wextra -Werror -g3 -fsanitize=address
-LDLIBS = -lft -ldl -lglfw -pthread
-LDFLAGS = $(addprefix -L,$(dir $(LIBS)))
+CFLAGS = -std=c++98 -Wall -Wextra -Werror #! INSERT C OR CPP FLAGS
+DFLAGS = -std=c++98 -Wall -Wextra -Werror -g3 -fsanitize=address #! INSERT C OR CPP FLAGS
+LDLIBS = -ldl -lglfw -pthread
+LDFLAGS = $(addprefix -L,$(dir $(LIBS))) #! REMOVE IN NON USE CASE
 CPPFLAGS = $(addprefix -I,$(INCS_PATH)) -MMD -MP
-COMP_OBJ = $(CC) $(CFLAGS) $(CPPFLAGS) -c $< -o $@
-COMP_EXE = $(CC) $(LDFLAGS) $(OBJS) $(LDLIBS) -o $(NAME)
+COMP_OBJ = $(COMP) $(CFLAGS) $(CPPFLAGS) -c $< -o $@
+COMP_EXE = $(COMP) $(LDFLAGS) $(OBJS) $(LDLIBS) -o $(TARGET_DIR)$(NAME) #! REMOVE LDFLAGS IN NON USE CASE
 
-#! ******************************************************************************#
+#* ******************************************************************************#
 #                                  FUNCTIONS                                     #
-#! ******************************************************************************#
+#* ******************************************************************************#
 
 define create_dir
 	$(MKDIR) $(dir $@)
@@ -86,41 +84,37 @@ define comp_objs
 	$(eval COUNT=$(shell expr $(COUNT) + 1))
 	$(COMP_OBJ)
 	$(SLEEP)
-	printf "GENERIC MESSAGE$(YELLOW) %d%%\r$(FCOLOR)" $$(echo $$(($(COUNT) * 100 / $(words $(SRCS)))))
-endef
-
-define comp_libft
-	printf "$(YELLOW)Building libft files\n$(RESET)"
-	$(MAKE) -C $(LIBFT_DIR)
+	printf "Compiling $(NAME) $(YELLOW) %d%%\r$(FCOLOR)" $$(echo $$(($(COUNT) * 100 / $(words $(SRCS)))))
 endef
 
 define comp_exe
+	$(MKDIR) $(TARGET_DIR)
 	$(COMP_EXE)
 	printf "\n"
-	printf "$(GREEN)PROGRAM ->$(RESET)$(PURPLE) READY\n$(RESET)"
+	printf "$(GREEN)$(NAME) ->$(RESET)$(PURPLE) Is Ready in directory '$(TARGET_DIR)'\n$(RESET)"
 endef
 
 define help
 	echo "${DARK_RED}Available targets:${RESET}"
 	printf "\n"
-	echo "${DARK_BLUE}all:${RESET} ${LIGHT_GRAY}Build push swap${RESET}"
-	echo "${DARK_BLUE}both:${RESET} ${LIGHT_GRAY}Build push swap and checker${RESET}"
-	echo "${DARK_BLUE}bonus:${RESET} ${LIGHT_GRAY}Build checker${RESET}"
+	echo "${DARK_BLUE}all:${RESET} ${LIGHT_GRAY}Build $(NAME)${RESET}"
+	echo "${DARK_BLUE}both:${RESET} ${LIGHT_GRAY}Build $(NAME) and $(NAME) bonus (if aplicable)${RESET}"
+	echo "${DARK_BLUE}bonus:${RESET} ${LIGHT_GRAY}Build $(NAME) bonus (if aplicable)${RESET}"
 	echo "${DARK_BLUE}re:${RESET} ${LIGHT_GRAY}Rebuild the program${RESET}"
 	echo "${DARK_BLUE}clean:${RESET} ${LIGHT_GRAY}Remove the object files${RESET}"
 	echo "${DARK_BLUE}fclean:${RESET} ${LIGHT_GRAY}Remove the program and the object files${RESET}"
 	echo "${DARK_BLUE}debug:${RESET} ${LIGHT_GRAY}Build the program with debugging information${RESET}"
-	echo "${DARK_BLUE}case:${RESET} ${LIGHT_GRAY}Show numbers with best and worst case${RESET}"
-	echo "${DARK_BLUE}test_nb:${RESET} ${LIGHT_GRAY}Test the program with provided list length${RESET}"
+	echo "${DARK_BLUE}run:${RESET} ${LIGHT_GRAY}run the program without arguments${RESET}"
+	echo "${DARK_BLUE}tests:${RESET} ${LIGHT_GRAY}build and run tests from test/ (Need format gtests)${RESET}"
 endef
 
-#! ******************************************************************************#
+#* ******************************************************************************#
 #                                   TARGETS                                      #
-#! ******************************************************************************#
+#* ******************************************************************************#
 
-all: $(LIBFT) $(NAME)
+all: $(LIBFT) $(NAME) #! REMOVE LIBFT IN NON USE CASE
 
-$(BUILD_DIR)%.o: %.c
+$(BUILD_DIR)%.o: %$(FILE_EXTENSION)
 	$(call create_dir)
 	$(call comp_objs)
 
@@ -132,14 +126,18 @@ $(LIBFT):
 
 clean:
 	$(RM) $(BUILD_DIR)
-	$(MAKE) -C $(LIBFT_DIR) clean
 
 fclean: clean
-	$(RM) $(NAME)
-	$(MAKE) -C $(LIBFT_DIR) fclean
+	$(RM) $(TARGET_DIR)
+	$(RM) tests/build/
 
 re: fclean all
 
+tests:
+	cd tests && cmake -B build && $(MAKE) -C build && ./build/run_tests
+
+run:
+	./bin/$(NAME)
 help:
 	$(call help)
 
