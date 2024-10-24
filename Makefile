@@ -40,11 +40,13 @@ INCS_PATH = #! INSERT INCLUDES PATH
 BUILD_DIR := #! INSERT BUILD PATH
 TARGET_DIR = #! INSERT BIN PATH
 LIBFT_DIR := #! INSERT LIBFT PATH IN USE CASE
+GTEST_DIR = tests/googletest #! VERIFY PATH OF TESTER
 
 #* ******************************************************************************#
 #                                   FILES                                        #
 #* ******************************************************************************#
 
+GTEST_REPO = git@github.com:google/googletest.git
 LIBS := $(LIBFT_DIR)libft.a #! REMOVE IN NON USE CASE
 SRCS = $(wildcard $(SRCS_PATH)*$(FILE_EXTENSION))
 OBJS = $(SRCS:%$(FILE_EXTENSION)=$(BUILD_DIR)%.o)
@@ -130,10 +132,14 @@ clean:
 fclean: clean
 	$(RM) $(TARGET_DIR)
 	$(RM) tests/build/
+	$(RM) $(GTEST_DIR)
 
 re: fclean all
 
-tests:
+$(GTEST_DIR):
+	git clone $(GTEST_REPO) $(GTEST_DIR)
+
+tests: $(GTEST_DIR)
 	cd tests && cmake -B build && $(MAKE) -C build && ./build/run_tests
 
 run:
