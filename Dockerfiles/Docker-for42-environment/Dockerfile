@@ -36,7 +36,10 @@ RUN apt-get install -y --no-install-recommends \
 	ripgrep \
 	libglfw3 \
 	libglfw3-dev \
-	gimp
+	gimp \
+	graphviz
+
+RUN pip install gprof2dot
 
 #configure locale:
 RUN locale-gen en_US.UTF-8
